@@ -1,11 +1,16 @@
 * {
   box-sizing: border-box;
 }
-
+footer {
+  color: white;
+  /* margin-top: 5px; */
+  /* margin-bottom: 40px; */
+  padding-top: 5px;
+  padding-bottom: 40px;
+}
 body {
   margin: 0;
   padding: 0;
-  font-family: "Karla", sans-serif;
 }
 
 button:focus {
@@ -20,6 +25,7 @@ button:focus {
 
 .pane {
   overflow-y: auto;
+  font-family: "Nanum Gothic", sans-serif;
   /* padding: 10px; */
 }
 
@@ -32,29 +38,23 @@ button:focus {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  color: white;
+  font-family: "Nanum Gothic", sans-serif;
 }
 
 .sidebar--header > h3 {
   font-size: 1.75rem;
+  /* letter-spacing: 10px; */
 }
 
 .new-note {
   cursor: pointer;
-  background-color: #4a4e74;
+  background-color: hsl(30, 100%, 47%);
   border: none;
   color: white;
   border-radius: 3px;
   height: 30px;
   width: 30px;
-}
-
-.first-note {
-  cursor: pointer;
-  background-color: #4a4e74;
-  border: none;
-  color: white;
-  border-radius: 3px;
-  padding: 1rem;
 }
 
 .editor {
@@ -87,23 +87,29 @@ button:focus {
 }
 
 .text-snippet {
-  padding-inline: 5px;
+  padding-left: 10px;
+  /* padding-inline: 5px; */
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.2rem;
-  color: #4a4e74;
+
+  /* letter-spacing: 10px; */
+  color: white;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.selected-note {
-  background-color: #4a4e74;
+.split .selected-note {
+  background-color: hsl(30, 100%, 47%);
+  border: 1px solid 4a4e74;
+  border-radius: 5px;
+  font-family: "Nanum Gothic", sans-serif;
 }
 
-.selected-note .text-snippet {
+.split .selected-note .text-snippet {
   color: white;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .gutter {
@@ -121,18 +127,82 @@ button:focus {
   cursor: col-resize;
 }
 
-.split {
+main {
+  border: 1px solid white;
+  border-radius: 20px;
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("../public/images/tijs-van-leur-9bd6LStI8ug-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+.newmain {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+.split {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 100px 100px 100px 100px;
+  width: 100vh;
+  padding: 20px;
+  padding-top: 100px;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+.newmain .description {
+  padding-left: 50px;
+  position: relative;
+  display: flex;
+  width: calc(100vw -200px);
+  color: #ffffff;
+  font-family: "Playfair Display", serif;
+  font-weight: 506px;
+  font-size: 250px;
+  line-height: 300px;
 }
 
 .no-notes {
-  width: 100%;
+  width: 100vh;
   height: 100vh;
+  /* height: calc(100% - 300px); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 100px 100px 100px 100px;
+
+  border: 1px solid white;
+  border-radius: 20px;
   background-color: whitesmoke;
+  color: hsl(30, 100%, 47%);
+  font-family: "Playfair Display", serif;
+  font-size: 50px;
+}
+.no-notes > h1 {
+  font-family: "Nanum Gothic", sans-serif;
+  line-height: 112px;
+}
+.no-notes .first-note {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: hsl(30, 100%, 47%);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 50px;
+  font-family: "Playfair Display", serif;
 }
 
 .delete-btn {
@@ -161,6 +231,8 @@ button:focus {
   border-bottom-left-radius: 1px;
   border-bottom-right-radius: 1px;
   margin-top: 4px;
+  margin-right: 5px;
+  color: white;
 }
 
 .gg-trash::after,

@@ -1,7 +1,6 @@
 import React from "react";
 import Sidebar from "./components/Sidebar";
 import Editor from "./components/Editor";
-import { data } from "./data";
 import Split from "react-split";
 import { nanoid } from "nanoid";
 import "./App.css";
@@ -36,7 +35,7 @@ import "./App.css";
  * it in the list of notes to the top of the list
  */
 export default function App() {
-  console.log("rendered");
+  // console.log("rendered");
 
   //Lazy state
   // const [state, setState] = React.useState(() =>
@@ -56,10 +55,10 @@ export default function App() {
   }, [notes]);
 
   function createNewNote() {
-    console.log("createNewNote");
+    // console.log("createNewNote");
     const newNote = {
       id: nanoid(),
-      body: "#Type it !",
+      body: "#첫문장은 제목이 돼요!\n ",
     };
     setNotes((prevNotes) => [newNote, ...prevNotes]); //최신값 제일 위에
     setCurrentNoteId(newNote.id);
@@ -81,7 +80,7 @@ export default function App() {
           : newArray.push(oldNote);
       });
 
-      console.log("newArray, ", newArray);
+      // console.log("newArray, ", newArray);
 
       // 방법2
       oldNotes = oldNotes.map((oldNote) => {
@@ -130,27 +129,42 @@ export default function App() {
   }
   return (
     <main>
-      {notes.length > 0 ? (
-        <Split sizes={[30, 70]} direction="horizontal" className="split">
-          <Sidebar
-            notes={notes}
-            currentNote={findCurrentNote()}
-            setCurrentNoteId={setCurrentNoteId}
-            newNote={createNewNote}
-            deleteNote={deleteNote}
-          />
-          {currentNoteId && notes.length > 0 && (
-            <Editor currentNote={findCurrentNote()} updateNote={updateNote} />
-          )}
-        </Split>
-      ) : (
-        <div className="no-notes">
-          <h1>You have no notes</h1>
-          <button className="first-note" onClick={createNewNote}>
-            Create one now
-          </button>
+      <div className="newmain">
+        {notes.length > 0 ? (
+          <Split sizes={[25, 75]} direction="horizontal" className="split">
+            {/* <div>ddd</div> */}
+            <Sidebar
+              notes={notes}
+              currentNote={findCurrentNote()}
+              setCurrentNoteId={setCurrentNoteId}
+              newNote={createNewNote}
+              deleteNote={deleteNote}
+            />
+            {currentNoteId && notes.length > 0 && (
+              <Editor currentNote={findCurrentNote()} updateNote={updateNote} />
+            )}
+          </Split>
+        ) : (
+          <div className="no-notes">
+            <h1>
+              노트를 <br />
+              작성해 <br />
+              보세요 .
+            </h1>
+            <button className="first-note" onClick={createNewNote}>
+              Create one now
+            </button>
+          </div>
+        )}
+        <div className="description">
+          your
+          <br />
+          new
+          <br />
+          notes
         </div>
-      )}
+      </div>
+      <footer>Copyright © 2022 sphere.ryoon All rights reserved.</footer>
     </main>
   );
 }

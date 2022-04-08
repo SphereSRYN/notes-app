@@ -23,7 +23,7 @@ export default function Sidebar({
 }) {
   //App에다가 상세기술은 다 기술해두고,
   //하위 컴포넌트에는 그거 프롭으로 넘겨서 갖다 쓰게함.
-  console.log("notes, ", notes);
+  // console.log("notes, ", notes);
 
   const noteElements = notes.map((note, index) => {
     // let summaryArray = note.body.split("\n");
@@ -32,7 +32,7 @@ export default function Sidebar({
       <div key={note.id}>
         <div
           className={`title ${
-            note.id === currentNote.id ? "selected-note" : ""
+            note.id === currentNote.id ? "selected-note" : "not-selected-note"
           }`}
           onClick={() => setCurrentNoteId(note.id)}
         >
@@ -53,7 +53,7 @@ export default function Sidebar({
   return (
     <section className="pane sidebar">
       <div className="sidebar--header">
-        <h3>Notes</h3>
+        <h4>새 노트를 작성해보세요</h4>
         <button className="new-note" onClick={newNote}>
           +
         </button>
