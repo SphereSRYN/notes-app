@@ -1,16 +1,11 @@
-# Intro
+![완성](./public/images/localnote.JPG)
 
-## ✏ Features to add
+# Local Note([Link🧨](https://localnote-ryun.netlify.app/))
 
-- Sync notes with local Storage
-- Add note summary titles
-- Move modified notes to the top of the list
-- Delete notes
+- react-mde, Show.js, react-split 사용
+- 함수형 컴포넌트로 작성
+- 작성된 데이터는 LocalStorage에 저장돼, 브라우저 종료후에도 지워지지 않도록 구현.
 
-### [Using localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+## ✏ 개발기간
 
-- localStorage.getItem("key")
-- localStorage.setItem("key", value)
-- Note: value must be string, so if you have a more complex value like an array or object to save, you'll need to use: JSON.stringfy(value) or JSON.paser(stringifiedValue)
-
-## ✏ Challenges
+- 2022.04.07
