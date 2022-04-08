@@ -31,7 +31,7 @@ button:focus {
 
 .sidebar {
   width: 20%;
-  height: 100vh;
+  height: 80vh;
 }
 
 .sidebar--header {
@@ -56,10 +56,13 @@ button:focus {
   height: 30px;
   width: 30px;
 }
-
+.new-note:hover {
+  background-color: white;
+  color: hsl(30, 100%, 47%);
+}
 .editor {
   width: 80%;
-  height: 100vh;
+  height: 80vh;
 }
 
 .title {
@@ -143,22 +146,24 @@ main {
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin: 0;
-  padding: 0;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  /* padding: 100px; */
+  height: 80vh;
 }
 .split {
   position: relative;
   display: flex;
   align-items: center;
-  margin: 100px 100px 100px 100px;
+  /* margin: 100px 100px 100px 100px; */
   width: 100vh;
   padding: 20px;
-  padding-top: 100px;
+  /* padding-top: 100px; */
   border: 1px solid white;
   border-radius: 20px;
 }
 .newmain .description {
-  padding-left: 50px;
+  padding-left: 100px;
   position: relative;
   display: flex;
   width: calc(100vw -200px);
@@ -171,13 +176,13 @@ main {
 
 .no-notes {
   width: 100vh;
-  height: 100vh;
+  height: 80vh;
   /* height: calc(100% - 300px); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 100px 100px 100px 100px;
+  /* margin: 100px 100px 100px 100px; */
 
   border: 1px solid white;
   border-radius: 20px;
