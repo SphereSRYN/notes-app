@@ -24,15 +24,31 @@ import "./App.css";
  *    into a real JS array.
  */
 
+/**
+ * Challenge:
+ * Lazily initialize our `notes` state so it doesn't
+ * reach into localStorage on every single re-render
+ * of the App component
+ */
+
+/**
+ * Challenge: When the user edits a note, reposition
+ * it in the list of notes to the top of the list
+ */
 export default function App() {
   console.log("rendered");
 
-  const parsedLST = JSON.parse(localStorage.getItem("notes"));
-  console.log("parsedLST", parsedLST);
+  //Lazy state
+  // const [state, setState] = React.useState(() =>
+  //   console.log("State initialization")
+  // );
 
-  const [notes, setNotes] = React.useState(parsedLST || []);
+  const parsedLST = JSON.parse(localStorage.getItem("notes"));
+  const [notes, setNotes] = React.useState(() => {
+    return parsedLST || [];
+  });
   const [currentNoteId, setCurrentNoteId] = React.useState(
-    (notes[notes.length - 1] && notes[notes.length - 1].id) || ""
+    (notes[0] && notes[0].id) || ""
   ); // before access to the note[0].id 하기 전에 먼저 체크
 
   React.useEffect(() => {
@@ -40,26 +56,49 @@ export default function App() {
   }, [notes]);
 
   function createNewNote() {
-    alert("createNewNote");
+    console.log("createNewNote");
     const newNote = {
       id: nanoid(),
-      body: "# Type your markdown note's title here",
+      body: "#Type it !",
     };
-    setNotes((prevNotes) => [...prevNotes, newNote]);
-    console.log("setnotes done, newNote.id: " + newNote.id); //최신값 제일 밑에
-
+    setNotes((prevNotes) => [newNote, ...prevNotes]); //최신값 제일 위에
     setCurrentNoteId(newNote.id);
   }
 
   function updateNote(text) {
-    console.log("text", text);
+    // 설계부터 하는게 그래서 중요
+    // 현재 수정 노트를 담을 변수만들고
+    // 노트아이디 값으로 현재 수정노트 인덱스 찾기
+    // map 돌면서 해당 인덱스가 아닐경우에만 retrun하고
+    // 마지막에 배열에 수정노트를 언쉬프트로
+
     setNotes((oldNotes) => {
-      let upNote = oldNotes.map((oldNote) => {
+      // 방법1
+      const newArray = [];
+      oldNotes.map((oldNote) => {
+        return oldNote.id === currentNoteId
+          ? newArray.unshift({ ...oldNote, body: text })
+          : newArray.push(oldNote);
+      });
+
+      console.log("newArray, ", newArray);
+
+      // 방법2
+      oldNotes = oldNotes.map((oldNote) => {
         return oldNote.id === currentNoteId
           ? { ...oldNote, body: text }
           : oldNote;
       });
-      return upNote;
+
+      const firstNoteIndex = oldNotes.findIndex(
+        (element, index) => element.id === currentNoteId
+      );
+
+      const firstNote = oldNotes[firstNoteIndex];
+      oldNotes.splice(firstNoteIndex, 1);
+      oldNotes.unshift(firstNote);
+
+      return oldNotes;
     });
   }
 
@@ -71,7 +110,24 @@ export default function App() {
       }) || notes[notes.length - 1] // 젤 밑에 있는 값
     );
   }
+  /**
+   * Challenge: complete and implement the deleteNote function
+   *
+   * Hints:
+   * 1. What array method can be used to return a new
+   *    array that has filtered out an item based
+   *    on a condition?
+   * 2. Notice the parameters being based to the function
+   *    and think about how both of those parameters
+   *    can be passed in during the onClick event handler
+   */
 
+  function deleteNote(event, noteId) {
+    event.stopPropagation();
+    const newNote = notes.filter((elem) => elem.id !== noteId);
+    setNotes(newNote);
+    currentNoteId === noteId && setCurrentNoteId(notes[0]);
+  }
   return (
     <main>
       {notes.length > 0 ? (
@@ -81,6 +137,7 @@ export default function App() {
             currentNote={findCurrentNote()}
             setCurrentNoteId={setCurrentNoteId}
             newNote={createNewNote}
+            deleteNote={deleteNote}
           />
           {currentNoteId && notes.length > 0 && (
             <Editor currentNote={findCurrentNote()} updateNote={updateNote} />

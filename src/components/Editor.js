@@ -8,7 +8,7 @@ import "react-mde/lib/styles/css/react-mde-all.css"; //이거 추가 필
 //Showdown can be used client side(in the browser) or server side(with Node.js).
 
 export default function Editor({ currentNote, updateNote }) {
-  console.log("Editor");
+  //   console.log("Editor");
   const [selectedTab, setSelectedTab] = React.useState("write");
 
   const converter = new Showdown.Converter({
