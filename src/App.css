@@ -166,7 +166,7 @@ main {
   padding-left: 100px;
   position: relative;
   display: flex;
-  width: 20px;
+  width: cal(100%-20px);
   color: #ffffff;
   font-family: "Playfair Display", serif;
   font-weight: 506px;
